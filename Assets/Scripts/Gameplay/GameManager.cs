@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Level level;
     private int easyMineCount = 14, medMineCount = 20, hardMineCount = 30;
-    private int mineCount;
+    [HideInInspector]
+    public int mineCount;
     // Start is called before the first frame update
     void Start()
     {
