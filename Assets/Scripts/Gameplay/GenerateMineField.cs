@@ -14,6 +14,9 @@ public class GenerateMineField : MonoBehaviour
     [SerializeField]
     private Sprite mineImage;
 
+    private void Awake() {
+        sr = GetComponent<SpriteRenderer>();
+    }
     private void Start() {
         isMine = Random.value < 0.15f;
 
@@ -33,6 +36,8 @@ public class GenerateMineField : MonoBehaviour
     }
 
     public void ShowNearMinesCount(int nearMines){
+        print("images length " + images.Length);
+        print("nearMines " + nearMines);
         sr.sprite = images[nearMines];
     }
 
@@ -41,6 +46,21 @@ public class GenerateMineField : MonoBehaviour
     }
 
     private void OnMouseDown() {
-        Debug.Log("clicked a mine: " + gameObject.name);    
+        if(isMine){
+            MatrixGrid.ShowAllMines();
+            print("Game Over");
+        }else{
+            print("click on mine: " +gameObject.name);
+            string[] index = gameObject.name.Split('-');
+            int x = int.Parse(index[0]);
+            int y = int.Parse(index[1]);
+            print("x: " + x + " y: "+ y);
+            ShowNearMinesCount(MatrixGrid.NearMines(x, y));
+            print("Investigating mines");
+            MatrixGrid.InvestigateMines(x, y, new bool[GameManager.instance.rows, GameManager.instance.cols]);
+            if(MatrixGrid.IfGameIsFinished()){
+                print("you won");
+            }
+        }
     }
 }
