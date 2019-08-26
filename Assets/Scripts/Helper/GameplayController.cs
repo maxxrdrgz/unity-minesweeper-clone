@@ -26,6 +26,9 @@ public class GameplayController : MonoBehaviour
     }
 
     public void ResetGame(){
+        if(GameManager.instance){
+            GameManager.instance.mineCount = 0;
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
