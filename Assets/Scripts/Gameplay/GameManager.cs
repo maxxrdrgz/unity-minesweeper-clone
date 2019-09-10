@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
         MakeSingleton();
     }
     
+    /** 
+        Creates singleton that persists through out the game
+    */
     void MakeSingleton(){
         if(instance != null){
             Destroy(gameObject);
@@ -45,6 +48,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /** 
+        On level load, if the active scene is the Gameplay scene, a call to the
+        generateMinefield object is called, and a new minefield object is 
+        instantiated.
+    */
     void OnLevelWasLoaded(){
         if(SceneManager.GetActiveScene().name == "Gameplay"){
             MatrixGrid.mineFields = new GenerateMineField[rows, cols];
@@ -65,6 +73,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /** 
+        Depending on the level difficulty chosen, for each level there is a max
+        number of mines that can be present on the mine field
+    */
     public bool CanBeMine(){
         switch(level){
             case Level.Easy:
@@ -93,6 +105,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /** 
+        When a new mine is generated, this function will increment the total
+        mine count
+    */
     public void IncrementMines(){
         mineCount++;
     }
