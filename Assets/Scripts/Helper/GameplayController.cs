@@ -25,6 +25,9 @@ public class GameplayController : MonoBehaviour
         SceneManager.LoadScene("DifficultySelect");
     }
 
+    /** 
+        Reloads the active scene and resets the mineCount back to 0
+    */
     public void ResetGame(){
         if(GameManager.instance){
             GameManager.instance.mineCount = 0;

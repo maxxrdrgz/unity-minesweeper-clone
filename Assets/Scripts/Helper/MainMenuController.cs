@@ -11,6 +11,9 @@ public class MainMenuController : MonoBehaviour
 
     }
 
+    /** 
+        Loads the difficulty select scene
+    */
     public void LoadDifficultySelectScreen(){
         SceneManager.LoadScene("DifficultySelect");
     }

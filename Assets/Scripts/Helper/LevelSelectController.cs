@@ -5,7 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelectController : MonoBehaviour
 {
+    /** 
+        This function will determine which level was selected, and depending
+        on the level will initialize the camera, rows and columns and the 
+        level enum found in the GameManager then calls the LoadGame() function
 
+        @params {string} level to load
+    */
     public void SelectLevel(string level){
         switch (level)
         {
