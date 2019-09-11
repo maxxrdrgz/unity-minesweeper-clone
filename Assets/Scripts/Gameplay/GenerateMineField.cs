@@ -17,6 +17,11 @@ public class GenerateMineField : MonoBehaviour
     private void Awake() {
         sr = GetComponent<SpriteRenderer>();
     }
+
+    /** 
+        Upon start, there's a 15% chance that this gameobject could be 
+        instantiated as a mine
+    */
     private void Start() {
         isMine = Random.value < 0.15f;
 
@@ -29,22 +34,43 @@ public class GenerateMineField : MonoBehaviour
         }
     }
 
+    /** 
+        If this gameobject is a mine, this gameobjects sprite will be replaced
+        with the mine image
+    */
     public void ShowMine(){
         if(isMine){
             sr.sprite = mineImage;
         }
     }
 
+    /** 
+        This function will replace this gameobjects sprite with the sprite equal
+        to the number of mines nearby. This is done by setting up the images
+        array indexes to match the near mines images.
+
+        @params {int} # of mines that are near by this current gameobject.
+    */
     public void ShowNearMinesCount(int nearMines){
         print("images length " + images.Length);
         print("nearMines " + nearMines);
         sr.sprite = images[nearMines];
     }
 
+    /** 
+        This function will return true if this gameobject's sprite is equal to
+        Hidden Element
+    */
     public bool IsClick(){
         return sr.sprite.texture.name == "Hidden Element";
     }
 
+    /** 
+        This function will dictate what happens depending on whether or not this
+        gameobject is a mine or not. If so, show all mines and print game over,
+        else show how many mines are near and if game is finished, print you won
+        to the console.
+    */
     private void OnMouseDown() {
         if(isMine){
             MatrixGrid.ShowAllMines();
